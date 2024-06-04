@@ -1,0 +1,107 @@
+
+<html>
+    {% load static %}
+    <head>
+        <link rel="stylesheet" href="{% static 'css/corona_dashboard.css' %}">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+        <h1>State wise cases</h1>
+        <form method="GET">
+            <div class="container-fuild">
+                <div class="dropdwon_box">
+                    <div class="col-md-4">
+                    <select name="state" id="select-option" class="form-control">
+                    <option value="">Select a Option</option>
+                    
+                        {% for st in state_list %}
+                        <option value="{{st}}" {% if st == selected_state  %} selected {% endif %}>{{st}}</option>
+                        {% endfor %}
+                    </select>
+                   <input type="submit" value="Search" id='search'>
+                  </div>
+                 </div>
+             </div>
+        </form>
+       
+        <div class="chart-1" style="display: flex; flex-wrap:wrap; ">
+            {% for i in data %}
+            <div class="charts" style="flex-basis: 50%; display: block;">
+                <p id="hello-{{forloop.counter}}" hidden data-item="{{i.name}}">{{i.value}}</p>
+                <h1>{{i.name}}</h1>
+                <div class="wrapper-{{forloop.counter}}">
+                <canvas id="chart-{{forloop.counter}}"></canvas>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        
+        
+        
+        
+            <script  type="text/javascript">
+                $(document).ready(function() {
+                for (i=1;i<={{data|length}};i++){
+                console.log($("#hello-"+i).text())
+                console.log($("#hello-"+i).attr("data-item"))
+                
+                    createChart("chart-"+i);
+                
+        
+            function createChart(chartId) {
+                ctx = document.getElementById(chartId);
+                console.log(ctx)
+                // JSON.parse($("#abc").text())
+                myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ["Active", "Confirmed", "deceased","recovered"],
+                    datasets: [{
+                        label:"district",
+                        data: JSON.parse($("#hello-"+i).text()),
+                        backgroundColor: [
+                            'rgba(1, 1, 122, 1)',
+                            'rgba(147, 250, 165, 1)',
+                            'rgba(207, 0, 15, 1)',
+                            'rgba(255, 255, 159, 1)'
+                    
+                        ],
+                        borderColor: [
+                            'rgba(1, 1, 122, 1)',
+                            'rgba(147, 250, 165, 1)',
+                            'rgba(207, 0, 15, 1)',
+                            'rgba(255, 255, 159, 1)'
+                        
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                                    
+                                    title: {
+                                        display: true,
+                                        text: ""
+                                    },
+                        animation: {
+                                        animateScale: true,
+                                        animateRotate: true
+                                    },
+                        responsive: true,
+                        maintainAspectRatio: false,
+                            
+                        legend: {
+                                        position: 'right',
+                            labels:{
+                            boxWidth: 10,
+                            padding: 12
+                            }
+                                    },
+                        },
+                });
+            };
+        }
+    });
+
+        </script>
+</html>
+

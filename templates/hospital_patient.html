@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/eventsche.css' %}">
+  </head>
+  <body>
+    <div class="grid-container">
+
+     
+
+      <!--sidebar---->
+
+    <div class="sidebar close">
+
+      <div class="logo-details">
+          <h2 style="color: #fff; text-align: center; text-transform: uppercase; letter-spacing: 0.5px;">Hospital Admin Page</h2>
+      </div>
+      <ul class="nav-links">
+        <li class="nav-1">
+          
+          <p style="color: white;">HospitalPatient Details</p>
+         
+        </li>
+      </ul>
+    </div>
+    
+      <div class="main1">
+        <h1 style="text-align:center">Hospital Patient Listing</h1>
+        {% if page_obj %}
+        <div class="cont">
+          <ul>
+            {% for adm in page_obj %}
+            <li class="item_wrap monday online">
+                  <div class="item">
+                      <div class="item_left">
+                          <div class="data">
+                              
+                              <div class="para">
+                                    <p>Patient Name : {{adm.username}}</p>
+                                    <p>Email id : {{adm.email}}</p>
+                                    <p>Age : {{adm.age}}</p>
+                                    <p>Phone Number : {{adm.phone_number}}</p>
+                                    <p>Gender : {{adm.gender}}</p>
+                                    <p>BedType : {{adm.bed_type}}</p>
+                                    <p>Address      : {{adm.address}}</p>
+                                    <p>Aadhaar : {{adm.aadhaar_number}}</p>
+                                    <p>Admission Date : {{adm.admission_date}}</p>
+                                  <br>
+                              </div>
+                          </div>
+                      </div>
+                      
+                  </div>
+              </li>
+            {% endfor %} 
+            </ul>
+        </div>
+      {% endif %}
+   
+      <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+  </div>
+</div>
+
+
+
+ 
+
+    <!-- Scripts -->
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{% static 'js/dashboard.js' %}"></script>
+  </body>
+</html>

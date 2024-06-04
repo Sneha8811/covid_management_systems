@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="{% static 'css/admission.css' %}">
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/eventsche.css' %}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission </title>
+</head>
+<body>
+    <div class="con">
+        <div class="con1">
+            <div class="container1">
+                <div class="title"><h3>Admission Form</h3></div>
+                <div class="content1">
+                  <form method="POST" class="admission-form" id="admission-forms">
+                    {% csrf_token %}
+                    <div class="user-details1">
+                      
+                      <div class="input-box1">
+                        <span class="details">Username</span>
+                        {{form.patient_name}}
+                      </div>
+                      <div class="input-box1">
+                        <span class="details">Email Id</span>
+                        {{form.email}}
+                      </div>
+                      <div class="input-box1">
+                        <span class="details">Age</span>
+                        {{form.age}}
+                      </div>
+                      <div class="input-box1">
+                        <span class="details">Phone Number</span>
+                        {{form.phone_number}}
+                      </div>
+                      <div class="input-box1">
+                        <span class="details">Emergency Contact</span>
+                        {{form.relative_contact}}
+                      </div>
+                      <div class="input-box1">
+                        <span class="details">Aadhaar Number</span>
+                        {{form.aadhaar_number}}
+                      </div>
+                      <div class="input-box1">
+                        <span class="details">Address</span>
+                        {{form.address}}
+                      </div>
+                      <div class="input-box1">
+                        <span class="details">Relative address</span>
+                        {{form.relative_address}}
+                      </div>
+
+                      
+                      
+                    </div>
+<!-- 
+                  <div class="gender-details">
+                    <input type="radio" name="gender" id="dot-1" value="Male">
+                    <input type="radio" name="gender" id="dot-2">
+                    <input type="radio" name="gender" id="dot-3" value="Female">
+                    <span class="gender-title">Gender</span>
+                    <div class="category">
+                      <label for="dot-1">
+                      <span class="dot one"></span>
+                      <span class="gender">Male</span>
+                    </label>
+                    <label for="dot-3">
+                        <span class="dot three"></span>
+                        <span class="gender">Female</span>
+                        </label>
+                    </div>
+                  </div> -->
+                  
+
+                  <div>
+                    <h3>Gender</h3>
+                    <br>
+                      <label class="container">Male
+                        <input type="radio" name="gender" value="Male" {%  if form.gender.value == "Male" %}  checked="checked" {% endif %}>
+                        <span class="checkmark"></span>
+                      </label>
+                      <label class="container">Female
+                        <input type="radio" name="gender"  value="Female" {%  if form.gender.value == "Female" %}  checked="checked" {% endif %}>
+                        <span class="checkmark"></span>
+                      </label>
+                  </div>
+                  <br>
+                 
+                  <!-- <div class="gender-details">
+                    <input type="radio" name="severity" id="dott-1" value="High">
+                    <input type="radio" name="severity" id="dott-2">
+                    <input type="radio" name="severity" id="dott-3" value="Low">
+                    <span class="gender-title">Severity</span>
+                    <div class="category-1">
+                      <label for="dott-1">
+                      <span class="dott one"></span>
+                      <span class="gender">High</span>
+                    </label>
+                    <label for="dott-3">
+                        <span class="dott three"></span>
+                        <span class="gender">Low</span>
+                        </label>
+                    </div>
+                </div> -->
+
+                <div>
+                  <h3>Severity</h3>
+                  <br>
+                    <label class="container">High
+                      <input type="radio" name="severity" value="High" {%  if form.severity.value == "High" %} checked="checked" {% endif %}>
+                      <span class="checkmark"></span>
+                    </label>
+                    <label class="container">Low
+                      <input type="radio" name="severity" value="Low" {%  if form.severity.value == "Low" %} checked="checked" {% endif %}>
+                      <span class="checkmark"></span>
+                    </label>
+                </div>
+               
+                <br>
+               
+                <div class="search2">
+                  <label for="state" style="font-weight:bold">State</label><br><br>
+                  <input list="states" name="state" id="state" placeholder="search" autocomplete="off" {% if form.state.value %} value="{{form.state.value}}" {% endif %}>
+                  <datalist id="states">
+                    {% for i,k in form.state.field.choices %}
+                      <option value="{{k}}">
+                    {% endfor %}
+                  </datalist>
+                </div>
+                <br>
+                <div class="search2">
+                  <label for="city" style="font-weight:bold">City</label><br><br>
+                  <input list="cities" name="city" id="city" placeholder="search" autocomplete="off" {% if form.city.value %} value="{{form.city.value}}" {% endif %}>
+                  <datalist id="cities">
+                    {% for i,k in form.city.field.choices %}
+                    <option value="{{k}}">
+                    {% endfor %}
+                  </datalist>
+              </div>
+
+                    <div class="button1">
+                        <input type="submit" value="Submit">
+                    </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+        <div class="con2">
+            <div class="con3">
+                <div class="con2-1">
+                    <h2>ADMISSION</h2>
+                    <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Culpa eaque, molestias sed praesentium deleniti est accusamus, odio earum quod sunt quos perferendis debitis ducimus dignissimos facere cumque obcaecati doloribus. Molestiae!</p>
+                </div>
+                <div class="con2-2">
+                    <h2>Note</h2>
+                    <p>According to your severity hospital or care center can be choosen.</p><br>
+                    <p>For high severity hospitals can be choosen and for low severity care centers can be choosen</p>
+                </div>
+            </div>
+         </div>
+    </div>
+</body>
+</html>

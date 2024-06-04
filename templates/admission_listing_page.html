@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/eventsche.css' %}">
+  </head>
+  <body>
+    <div class="grid-container">
+
+     
+
+      <!--sidebar---->
+
+    <div class="sidebar close">
+
+      <div class="logo-details">
+          <h2 style="color: #fff; text-align: center; text-transform: uppercase; letter-spacing: 0.5px;">Admin Dashboard</h2>
+      </div>
+      <ul class="nav-links">
+        <li class="nav-1">
+          <a href="#">
+          <!-- <span class="link_name active">Dashboard</span> -->
+          </a>
+          <p style="color: white;">Dashboard</p>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="{% url 'admin-dashboard' %}">Manage</a></li>
+          </ul>
+        </li>
+  
+        <li class="nav-3">
+          <a href="#">
+          <p style="color: white;">Hospitals</p>
+          <!-- <span class="link_name">Hospital</span> -->
+          </a>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="{% url 'manage-hospital' %}">Manage</a></li>
+            <li><a href="{% url 'add-hospital' %}">Add</a></li>
+          </ul>
+        </li>
+        <li class="nav-4">
+          <a href="#">
+              <p style="color: white;">Care center</p>
+          <!-- <span class="link_name">Care center</span> -->
+          </a>
+          <ul class="sub-menu blank">
+              <li><a class="link_name" href="{% url 'manage-carecenter' %}">Manage</a></li>
+              <li><a href="{% url 'add-carecenter' %}">Add</a></li>
+          </ul>
+        </li>
+        <li class="nav-5">
+          <a href="#">
+          <p style="color: white;">Admission</p>
+          <!-- <span class="link_name">Admission history</span> -->
+          </a>
+          <ul class="sub-menu blank">
+            <li><a class="link_name" href="{% url 'manage-admission' %}">Manage </a></li>
+           
+          </ul>
+        </li>
+      </ul>
+    </div>
+    
+      <div class="main1">
+        <h1 style="text-align:center">Admission Listing</h1>
+        {% if page_obj %}
+        <div class="cont">
+          <ul>
+            {% for adm in page_obj %}
+            <li class="item_wrap monday online">
+                  <div class="item">
+                      <div class="item_left">
+                          <div class="data">
+                              
+                              <div class="para">
+                                    <p>Patient Name : {{adm.patient_name}}</p>
+                                    <p>Email id : {{adm.email}}</p>
+                                    <p>Age : {{adm.age}}</p>
+                                    <p>Phone Number : {{adm.phone_number}}</p>
+                                    <p>Gender : {{adm.gender}}</p>
+                                    <p>Severity : {{adm.severity}}</p>
+                                    <p>Address      : {{adm.address}}</p>
+                                    <p>Admission Date : {{adm.admission_date}}</p>
+                                  <br>
+                                  <p class="location"><span>State: </span>{{adm.state}}</p>
+                                  <p class="location"><span>City: </span>{{adm.city}}</p>
+                              </div>
+                          </div>
+                      </div>
+                      
+                  </div>
+              </li>
+            {% endfor %} 
+            </ul>
+        </div>
+      {% endif %}
+   
+      <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="current">
+                Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+
+  </div>
+</div>
+
+
+
+ 
+
+    <!-- Scripts -->
+    <!-- ApexCharts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+    <!-- Custom JS -->
+    <script src="{% static 'js/dashboard.js' %}"></script>
+  </body>
+</html>

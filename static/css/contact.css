@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.flx-1{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 50px;
+    height: 200px;
+}
+.flx-2,
+.flx-3,
+.flx-4{
+    flex-basis: 33.3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flx-3{
+    border-right: 1px solid gray;
+    border-left: 1px solid gray;
+}
+.flx-2,
+.flx-3,
+.flx-4{
+    flex-direction: column;
+}
+i{
+    font-size: 30px;
+    margin-bottom: 10px;
+}

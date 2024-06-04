@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/bar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/edit.css' %}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script> -->
+    
+      <!-- Custom JS -->
+      <script src="{% static 'js/dashboard.js' %}"></script>
+    <title>Dashboard</title>
+    <style>
+
+body, html{
+  background: rgb(6, 0, 0);
+  padding-top: 10px;
+}
+
+.wrapper, .wrapper2{
+  width:20%;
+  display:block;
+  overflow:hidden;
+  margin:0 auto;
+  padding: 60px 50px;
+  background:#fff;
+  border-radius:4px;
+  
+}
+
+/* canvas{
+  background:rgb(6, 0, 0);
+  height:250px;
+} */
+
+h1{
+  font-family: Roboto;
+  color: #fff;
+  margin-top:50px;
+  font-weight:200;
+  text-align: center;
+  display: block;
+  text-decoration: none;
+}
+
+        input[type=text], select {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+        
+        input[type=submit] {
+          width: 20%;
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        
+        input[type=submit]:hover {
+          background-color: #45a049;
+        }
+        .main1{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .main1-1 {
+          border-radius: 5px;
+          padding: 20px;
+          margin: 30px;
+        }
+        
+        #canvas-holder {
+  width: 100%;
+  margin-top: 50px;
+  text-align: center;
+}
+
+#chartjs-tooltip {
+  opacity: 1;
+  position: absolute;
+  background: rgba(0, 0, 0, .7);
+  color: white;
+  border-radius: 3px;
+  -webkit-transition: all .1s ease;
+  transition: all .1s ease;
+  pointer-events: none;
+  -webkit-transform: translate(-50%, 0);
+  transform: translate(-50%, 0);
+}
+
+.chartjs-tooltip-key {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+}
+canvas #oilChart{
+  width: 300px;
+  height: 300px;
+}
+        </style>
+</head>
+<body>
+    <div class="grid-container">
+
+     
+
+        <!--sidebar---->
+  
+      <div class="sidebar close">
+  
+        <div class="logo-details">
+            <h2 style="color: #fff; text-align: center; text-transform: uppercase; letter-spacing: 0.5px;">Admin Dashboard</h2>
+        </div>
+        <ul class="nav-links">
+          <li class="nav-1">
+            <a href="#">
+            <!-- <span class="link_name active">Dashboard</span> -->
+            </a>
+            <p style="color: white;">Dashboard</p>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="{% url 'admin-dashboard' %}">Dashboard</a></li>
+            </ul>
+          </li>
+          
+          <li class="nav-3">
+            <a href="#">
+            <p style="color: white;">Hospital</p>
+            <!-- <span class="link_name">Hospital</span> -->
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="{% url 'manage-hospital' %}">Manage</a></li>
+              <li><a href="{% url 'add-hospital' %}">Add</a></li>
+            </ul>
+          </li>
+          <li class="nav-4">
+            <a href="#">
+                <p style="color: rgb(88, 14, 179);">Care center</p>
+            <!-- <span class="link_name">Care center</span> -->
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="{% url 'manage-carecenter' %}">Manage</a></li>
+                <li><a href="{% url 'add-carecenter' %}">Add</a></li>
+            </ul>
+          </li>
+          <li class="nav-5">
+            <a href="#">
+            <p style="color: white;">Admission</p>
+            <!-- <span class="link_name">Admission history</span> -->
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Manage </a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      
+      
+     <div class="chr-1" style="display: flex;  flex-direction:column; justify-content:center; align-items:center; margin-left:400px;">
+       
+        <div class="ch-1">
+          <h1 style="color: white">Total no of hospitals and carecenters</h1>
+          <br>
+          <canvas id="oilChart" ></canvas>
+          <p id="hosp" hidden>{{context.hospital_count}}</p>
+          <p id="cc" hidden>{{context.carecenter_count}}</p>
+        </div>
+       
+          <div>
+              <h1 style="color: white">Total no of Registered Users</h1>
+               <canvas id="oilChart1" ></canvas>
+               <p id="reg" hidden>{{context.registered_user_count}}</p>
+           </div>
+       
+           <div>
+            <h1 style="color: white">Total no of Hospital Admitted patient</h1>
+             <canvas id="oilChart2" ></canvas>
+             <p id="hos-patient" hidden>{{context.hospital_patient_count}}</p>
+         </div>
+         <div>
+          <h1 style="color: white">Total no of Carecenter Admitted patient</h1>
+           <canvas id="oilChart3" ></canvas>
+           <p id="care-patient" hidden>{{context.carecenter_patient_count}}</p>
+       </div>
+       
+     </div>
+
+  <script type="text/javascript">
+    
+    var oilCanvas = document.getElementById("oilChart");
+    oilCanvas.style.width = '100px';
+Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontSize = 18;
+
+var oilData = {
+    labels: [
+        "Hospitals",
+        "Carecenters",
+        
+    ],
+    datasets: [
+        {
+            data: [parseInt($("#hosp").text()),parseInt($("#cc").text())],
+            backgroundColor: [
+                "#FF6384",
+                "#63FF84",
+              
+            ]
+        }]
+};
+
+var pieChart = new Chart(oilCanvas, {
+  type: 'doughnut',
+  data: oilData
+});
+
+
+var oilCanvas1 = document.getElementById("oilChart1");
+oilCanvas1.style.width = '200px';
+Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontSize = 18;
+
+var oilData1 = {
+    labels: [
+        "Registered Users",
+        
+    ],
+    datasets: [
+        {
+            data: [parseInt($("#reg").text())],
+            backgroundColor: [
+                "rgb(85, 42, 216)",
+            ]
+        }]
+};
+
+var pieChart1 = new Chart(oilCanvas1, {
+  type: 'doughnut',
+  data: oilData1
+});
+
+var oilCanvas2 = document.getElementById("oilChart2");
+
+Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontSize = 18;
+
+var oilData2 = {
+    labels: [
+        "Hospital Admitted Patient Count",
+        
+    ],
+    datasets: [
+        {
+            data: [parseInt($("#hos-patient").text())],
+            backgroundColor: [
+                "rgb(85, 42, 216)",
+            ]
+        }]
+};
+
+var pieChart2 = new Chart(oilCanvas2, {
+  type: 'doughnut',
+  data: oilData2
+});
+
+var oilCanvas3 = document.getElementById("oilChart3");
+
+Chart.defaults.global.defaultFontFamily = "Lato";
+Chart.defaults.global.defaultFontSize = 18;
+
+var oilData3 = {
+    labels: [
+        "CareCenter Admitted Patient Count",
+        
+    ],
+    datasets: [
+        {
+            data: [parseInt($("#care-patient").text())],
+            backgroundColor: [
+                "rgb(85, 42, 216)",
+            ]
+        }]
+};
+
+var pieChart3 = new Chart(oilCanvas3, {
+  type: 'doughnut',
+  data: oilData3
+});
+
+
+  </script>
+  
+
+      
+</body>
+</html>

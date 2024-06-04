@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/bar.css' %}">
+    <link rel="stylesheet" href="{% static 'css/edit.css' %}">
+    <title>Edit</title>
+    <style>
+        input[type=text], select {
+          width: 100%;
+          padding: 12px 20px;
+          margin: 8px 0;
+          display: inline-block;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+        }
+        
+        input[type=submit] {
+          width: 20%;
+          background-color: #4CAF50;
+          color: white;
+          padding: 14px 20px;
+          margin: 8px 0;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+        }
+        
+        input[type=submit]:hover {
+          background-color: #45a049;
+        }
+        .main1{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .main1-1 {
+          border-radius: 5px;
+          background-color: #f2f2f2;
+          padding: 20px;
+          margin: 30px;
+        }
+        </style>
+</head>
+<body>
+    <div class="grid-container">
+
+     
+
+        <!--sidebar---->
+  
+      <div class="sidebar close">
+  
+        <div class="logo-details">
+            <h2 style="color: #fff; text-align: center; text-transform: uppercase; letter-spacing: 0.5px;">Admin Dashboard</h2>
+        </div>
+        <ul class="nav-links">
+          <li class="nav-1">
+            <a href="#">
+            <!-- <span class="link_name active">Dashboard</span> -->
+            </a>
+            <p style="color: white;">Dashboard</p>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Manage</a></li>
+              <li><a href="#">Add</a></li>
+            </ul>
+          </li>
+         
+          <li class="nav-3">
+            <a href="#">
+            <p style="color: white;">Hospital</p>
+            <!-- <span class="link_name">Hospital</span> -->
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="{% url 'manage-hospital' %}">Manage</a></li>
+              <li><a href="{% url 'add-hospital' %}">Add</a></li>
+            </ul>
+          </li>
+          <li class="nav-4">
+            <a href="#">
+                <p style="color: white;">Care center</p>
+            <!-- <span class="link_name">Care center</span> -->
+            </a>
+            <ul class="sub-menu blank">
+                <li><a class="link_name" href="{% url 'manage-carecenter' %}">Manage</a></li>
+                <li><a href="{% url 'add-carecenter' %}">Add</a></li>
+            </ul>
+          </li>
+          <li class="nav-5">
+            <a href="#">
+            <p style="color: white;">Admission</p>
+            <!-- <span class="link_name">Admission history</span> -->
+            </a>
+            <ul class="sub-menu blank">
+              <li><a class="link_name" href="#">Manage </a></li>
+              
+            </ul>
+          </li>
+        </ul>
+      </div>
+       <div class="main1">
+        <div class="main1-1">
+            <form method="post">
+              {% csrf_token %}
+              <label for="fname">NAME</label>
+              {{form.name}}
+
+
+              <label for="lname">State</label>
+              {{form.state}}
+
+              <label for="lname">City</label>
+              {{form.city}}
+
+              <label for="lname">Address</label>
+              {{form.address}}
+
+              <label for="lname">Description</label>
+              {{form.description}}
+
+              <label for="lname">Created Date</label>
+              {{form.created}}
+
+              <label for="lname">Updated Date</label>
+              {{form.updated}} 
+            
+              <input type="submit" value="Save">
+            </form>
+          </div>
+       </div>
+            
+               
+              
+               
+               
+    </div>
+  </div>
+   
+  
+      <!-- Scripts -->
+      <!-- ApexCharts -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+      <!-- Custom JS -->
+      <script src="{% static 'js/dashboard.js' %}"></script>
+</body>
+</html>

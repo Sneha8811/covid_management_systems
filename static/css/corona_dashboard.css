@@ -1,0 +1,59 @@
+body, html{
+    background: black;
+    padding-top: 10px;
+  }
+  
+  .wrapper, .wrapper2{
+    /* width:40%; */
+    display:block;
+    overflow:hidden;
+    margin:0 auto;
+    padding: 60px 50px;
+    border-radius:4px;
+    
+  }
+  
+  canvas{
+    height:200;
+    display:flex;
+    flex-wrap: wrap;
+  }
+  
+  h1{
+    font-family: Roboto;
+    color: #fff;
+    margin-top:50px;
+    font-weight:200;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+  }
+  .chart-1{
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+  }
+  
+
+
+  .dropdwon_box{padding:15px;}
+
+
+/*Footer start*/
+            .codepen_profile{position: fixed; right: 20px; bottom: 20px;}
+            .codepen_profile a {background: rgb(245 122 32 / 53%); padding: 15px; border-radius: 50%; box-shadow: hsl(0deg 0% 80%) 0 5px 16px; height: 60px; width: 60px; display: inline-block; }
+            /*Footer End*/
+
+            select#select-option{
+                width: 50%;
+                height: 5%;
+            }
+
+            #search{
+                height: 35px;
+                width: 95px;
+            
+            }
+            option {
+                font-size: 22px;
+            }
